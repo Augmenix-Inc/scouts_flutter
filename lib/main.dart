@@ -22,4 +22,9 @@ void main() async {
   }
 
   // Handle logged in situation
+  runApp(MaterialApp(
+    theme: lightTheme,
+    darkTheme: darkTheme,
+    home: const Login(),
+  ));
 }
