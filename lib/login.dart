@@ -71,11 +71,11 @@ class _LoginState extends State<Login> {
               height: 40,
             ),
             InkResponse(
+                onTap: initiateLogin,
                 child: SvgPicture.asset(
                   "assets/glogo.svg",
                   height: 50,
-                ),
-                onTap: initiateLogin)
+                ))
           ],
         ),
       )),
