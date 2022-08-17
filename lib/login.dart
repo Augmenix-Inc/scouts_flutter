@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:googleapis/drive/v3.dart' as drive;
 import 'package:scouts_flutter/theme.dart';
 
 class Login extends StatefulWidget {
@@ -12,8 +13,10 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   Future<void> initiateLogin() async {
+    final googleAuthProvider = GoogleAuthProvider();
+    googleAuthProvider.addScope(drive.DriveApi.driveReadonlyScope);
     final user =
-        await FirebaseAuth.instance.signInWithPopup(GoogleAuthProvider());
+        await FirebaseAuth.instance.signInWithPopup(googleAuthProvider);
     if (user.user != null) {
       showDialog(
           context: context,
