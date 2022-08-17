@@ -64,7 +64,8 @@ class _LoginState extends State<Login> {
             Text(
               "The Stacked Portal",
               style: theme.textTheme.displayLarge!
-                  .copyWith(color: theme.colorScheme.primary),
+                  .copyWith(color: theme.colorScheme.primary)
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 50),
             Image.asset(
