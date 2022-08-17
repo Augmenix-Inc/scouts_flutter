@@ -70,12 +70,36 @@ class _LoginState extends State<Login> {
             const SizedBox(
               height: 40,
             ),
-            InkResponse(
-                onTap: initiateLogin,
-                child: SvgPicture.asset(
-                  "assets/glogo.svg",
-                  height: 50,
-                ))
+            
+            // Login button 1
+            // InkResponse(
+            //     onTap: initiateLogin,
+            //     child: SvgPicture.asset(
+            //       "assets/glogo.svg",
+            //       height: 50,
+            //     ))
+
+            // Login button 2
+            InkWell(
+              onTap: initiateLogin,
+              child: Ink(
+                color: const Color(0xFF397AF3),
+                child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      SvgPicture.asset("assets/glogo.svg",height: 50),
+                      const SizedBox(width: 12),
+                      const Text('Sign in with Google'),
+                    ],
+                  ),
+                ),
+              ),
+            )
+
+
+            
           ],
         ),
       )),
