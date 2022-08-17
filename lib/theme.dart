@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-final lightColorScheme = ColorScheme.fromSeed(
-        seedColor: const Color(0xFF2563EB), brightness: Brightness.light);
-final darkColorScheme = ColorScheme.fromSeed(
-        seedColor: const Color(0xFF2563EB), brightness: Brightness.dark);
+final _lightColorScheme = ColorScheme.fromSeed(
+    seedColor: const Color(0xFF2563EB), brightness: Brightness.light);
+final _darkColorScheme = ColorScheme.fromSeed(
+    seedColor: const Color(0xFF2563EB), brightness: Brightness.dark);
 const _textTheme = TextTheme(
     displayLarge: TextStyle(
         fontSize: 57, fontFamily: "Inter", fontWeight: FontWeight.normal),
@@ -52,13 +52,13 @@ const _textTheme = TextTheme(
         fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w500));
 
 final lightTheme = ThemeData(
-    colorScheme: lightColorScheme,
-        scaffoldBackgroundColor: lightColorScheme.background,
+    colorScheme: _lightColorScheme,
+    scaffoldBackgroundColor: _lightColorScheme.background,
     useMaterial3: true,
     textTheme: _textTheme);
 
 final darkTheme = ThemeData(
-    colorScheme: darkColorScheme,
+    colorScheme: _darkColorScheme,
     useMaterial3: true,
-    scaffoldBackgroundColor: darkColorScheme.background,
+    scaffoldBackgroundColor: _darkColorScheme.background,
     textTheme: _textTheme);

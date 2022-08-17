@@ -45,6 +45,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final signInBtnColorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFFdc4a43), brightness: theme.brightness);
 
     return MaterialApp(
       theme: lightTheme,
@@ -70,68 +72,44 @@ class _LoginState extends State<Login> {
             const SizedBox(
               height: 40,
             ),
-
-            // Login button 1
-            // InkResponse(
-            //     onTap: initiateLogin,
-            //     child: SvgPicture.asset(
-            //       "assets/glogo.svg",
-            //       height: 50,
-            //     ))
-
-            // Login button 2
-            // InkWell(
-            //   onTap: initiateLogin,
-            //   child: Ink(
-            //     color: const Color(0xFF397AF3),
-            //     child: Padding(
-            //       padding: const EdgeInsets.all(6),
-            //       child: Wrap(
-            //         crossAxisAlignment: WrapCrossAlignment.center,
-            //         children: [
-            //           SvgPicture.asset("assets/glogo.svg",height: 50),
-            //           const SizedBox(width: 12),
-            //           const Text('Sign in with Google'),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // )
-
-            // Login button 3
-            InkWell(
-              onTap: initiateLogin,
-              child: Ink(
-                child: Padding(
-                  padding: const EdgeInsets.all(6),
-                  child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        TextButton(
-                            style: ButtonStyle(
-                                padding: MaterialStateProperty.all<EdgeInsets>(
-                                    const EdgeInsets.all(15)),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        theme.colorScheme.primaryContainer),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  side: BorderSide(
-                                      color: theme.colorScheme.primary,
-                                      width: 2),
-                                ))),
-                            onPressed: initiateLogin,
-                            child: Text(
-                              "Sign in to google".toUpperCase(),
-                              style: theme.textTheme.labelLarge!
-                                  .copyWith(color: theme.colorScheme.primary),
-                            ))
-                      ]),
-                ),
-              ),
-            )
+            ElevatedButton(
+                onPressed: initiateLogin,
+                style: ButtonStyle(
+                    elevation: MaterialStateProperty.all(0),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent),
+                    overlayColor: MaterialStateProperty.resolveWith((states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return signInBtnColorScheme.primaryContainer.withOpacity(0.08);
+                      } else if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return signInBtnColorScheme.primaryContainer.withOpacity(0.12);
+                      }
+                      return Colors.transparent;
+                    }),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(
+                          color: signInBtnColorScheme.primary, width: 2),
+                    ))),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      "assets/glogo.svg",
+                      height: 14,
+                    ),
+                    const SizedBox(
+                      width: 6,
+                    ),
+                    Text(
+                      "Sign in with Google Drive",
+                      style: theme.textTheme.labelLarge!
+                          .copyWith(color: signInBtnColorScheme.primary),
+                    )
+                  ],
+                ))
           ],
         ),
       )),
