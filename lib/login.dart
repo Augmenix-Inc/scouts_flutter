@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/drive/v3.dart' as drive;
+import 'package:http/http.dart';
+import 'package:scouts_flutter/authenticated_client.dart';
 import 'package:scouts_flutter/theme.dart';
 
 class Login extends StatefulWidget {
@@ -13,11 +16,13 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   Future<void> initiateLogin() async {
-    final googleAuthProvider = GoogleAuthProvider();
-    googleAuthProvider.addScope(drive.DriveApi.driveReadonlyScope);
-    final user =
-        await FirebaseAuth.instance.signInWithPopup(googleAuthProvider);
-    if (user.user != null) {
+    final googleSignIn = GoogleSignIn(
+      scopes: [drive.DriveApi.driveReadonlyScope],
+    );
+
+    final user = await googleSignIn.signIn();
+
+    if (user == null) {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -41,7 +46,15 @@ class _LoginState extends State<Login> {
       return;
     }
 
-    final email = user.user!.email;
+    // Temporary: will be moved somewhere soon
+    final authHeaders = await user.authHeaders;
+    final baseClient = Client();
+    final authenticateClient = AuthenticateClient(authHeaders, baseClient);
+    final driveApi = drive.DriveApi(authenticateClient);
+    final drive.Media test_file = (await driveApi.files.export(
+        "1EOGux-SMx0-bKr9pPRdcqg4YZ5Mm13KNv3U5vXTKbRc", "text/csv",
+        downloadOptions: drive.DownloadOptions.fullMedia)) as drive.Media;
+
     // Get spreadsheet data, navigate to home page
   }
 
