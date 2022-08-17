@@ -46,7 +46,8 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final signInBtnColorScheme = ColorScheme.fromSeed(
-        seedColor: const Color(0xFFdc4a43), brightness: theme.brightness);
+        seedColor: const Color.fromARGB(255, 226, 209, 15),
+        brightness: theme.brightness);
 
     return MaterialApp(
       theme: lightTheme,
@@ -57,20 +58,26 @@ class _LoginState extends State<Login> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              "The Stacked Portal",
+              style: theme.textTheme.displayLarge!
+                  .copyWith(color: theme.colorScheme.primary),
+            ),
+            const SizedBox(height: 50),
             Image.asset(
               "assets/logo.jpg",
               height: 250,
               fit: BoxFit.fitHeight,
             ),
             const SizedBox(
-              height: 50,
+              height: 30,
             ),
             Text(
-              "To get started, please sign in with your school Gmail account.",
+              "To get started, login with your School's Gmail account.",
               style: theme.textTheme.bodyLarge,
             ),
             const SizedBox(
-              height: 40,
+              height: 30,
             ),
             ElevatedButton(
                 onPressed: initiateLogin,
@@ -80,10 +87,12 @@ class _LoginState extends State<Login> {
                         MaterialStateProperty.all(Colors.transparent),
                     overlayColor: MaterialStateProperty.resolveWith((states) {
                       if (states.contains(MaterialState.hovered)) {
-                        return signInBtnColorScheme.primaryContainer.withOpacity(0.08);
+                        return signInBtnColorScheme.primaryContainer
+                            .withOpacity(0.08);
                       } else if (states.contains(MaterialState.focused) ||
                           states.contains(MaterialState.pressed)) {
-                        return signInBtnColorScheme.primaryContainer.withOpacity(0.12);
+                        return signInBtnColorScheme.primaryContainer
+                            .withOpacity(0.12);
                       }
                       return Colors.transparent;
                     }),
