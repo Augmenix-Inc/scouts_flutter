@@ -97,7 +97,7 @@ class _LoginState extends State<Login> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SvgPicture.asset(
-                      "assets/glogo.svg",
+                      "assets/gdrivelogo.svg",
                       height: 14,
                     ),
                     const SizedBox(
