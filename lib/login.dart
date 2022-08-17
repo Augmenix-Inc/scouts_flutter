@@ -111,14 +111,14 @@ class _LoginState extends State<Login> {
                   children: [
                     SvgPicture.asset(
                       "assets/gdrivelogo.svg",
-                      height: 14,
+                      height: 18,
                     ),
                     const SizedBox(
                       width: 6,
                     ),
                     Text(
                       "Sign in with Google Drive",
-                      style: theme.textTheme.labelLarge!
+                      style: theme.textTheme.bodyLarge!
                           .copyWith(color: signInBtnColorScheme.primary),
                     )
                   ],

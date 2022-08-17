@@ -66,10 +66,10 @@ flutter:
     - assets/gdrivelogo.svg
 
     # Patrols
-    - assets/exa.gif
-    - assets/nano.gif
-    - assets/tera.gif
-    - assets/zetta.gif
+    - assets/patrol/exa.gif
+    - assets/patrol/nano.gif
+    - assets/patrol/tera.gif
+    - assets/patrol/zetta.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
