@@ -70,7 +70,7 @@ class _LoginState extends State<Login> {
             const SizedBox(
               height: 40,
             ),
-            
+
             // Login button 1
             // InkResponse(
             //     onTap: initiateLogin,
@@ -80,26 +80,58 @@ class _LoginState extends State<Login> {
             //     ))
 
             // Login button 2
+            // InkWell(
+            //   onTap: initiateLogin,
+            //   child: Ink(
+            //     color: const Color(0xFF397AF3),
+            //     child: Padding(
+            //       padding: const EdgeInsets.all(6),
+            //       child: Wrap(
+            //         crossAxisAlignment: WrapCrossAlignment.center,
+            //         children: [
+            //           SvgPicture.asset("assets/glogo.svg",height: 50),
+            //           const SizedBox(width: 12),
+            //           const Text('Sign in with Google'),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // )
+
+            // Login button 3
             InkWell(
               onTap: initiateLogin,
               child: Ink(
-                color: const Color(0xFF397AF3),
                 child: Padding(
                   padding: const EdgeInsets.all(6),
                   child: Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      SvgPicture.asset("assets/glogo.svg",height: 50),
-                      const SizedBox(width: 12),
-                      const Text('Sign in with Google'),
-                    ],
-                  ),
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        TextButton(
+                            style: ButtonStyle(
+                                padding: MaterialStateProperty.all<EdgeInsets>(
+                                    const EdgeInsets.all(15)),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        theme.colorScheme.primaryContainer),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  side: BorderSide(
+                                      color: theme.colorScheme.primary,
+                                      width: 2),
+                                ))),
+                            onPressed: initiateLogin,
+                            child: Text(
+                              "Sign in to google".toUpperCase(),
+                              style: theme.textTheme.labelLarge!
+                                  .copyWith(color: theme.colorScheme.primary),
+                            ))
+                      ]),
                 ),
               ),
             )
-
-
-            
           ],
         ),
       )),
