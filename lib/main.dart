@@ -8,21 +8,29 @@ import 'package:scouts_flutter/home.dart';
 import 'package:scouts_flutter/login.dart';
 import 'package:scouts_flutter/theme.dart';
 import 'package:scouts_flutter/utilities/classes/mainsheet.dart';
+import 'package:scouts_flutter/utilities/classes/person.dart';
 import 'package:scouts_flutter/utilities/driveutils.dart';
 
 final googleSignIn = GoogleSignIn(
   scopes: [drive.DriveApi.driveReadonlyScope],
 );
+late final Person userPerson;
 
 Future<void> initApp() async {
   // Initialise Google Drive API
   await DriveUtils.initializeDrive();
 
+  // Download main sheet
   final mainSheet = MainSheet();
-  await mainSheet.initUserSheets(googleSignIn.currentUser!.email);
+  await mainSheet.initUserSheets();
+
+  // Get person details for user
+  // TODO: using richard's email temporarily
+  userPerson = await mainSheet.getPersonWithEmail("tan_yu_zhe_richard@s2020.ssts.edu.sg");
 }
 
 void main() async {
+  await googleSignIn.signIn();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // For debugging purposes, set persistence to tab/session only

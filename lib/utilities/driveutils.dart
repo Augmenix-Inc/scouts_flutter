@@ -13,7 +13,7 @@ class DriveUtils {
 
   static Future<void> initializeDrive() async {
     if (_isInitialised) return;
-    
+
     final authHeaders = await googleSignIn.currentUser!.authHeaders;
     final authenticateClient = AuthenticateClient(authHeaders, Client());
     driveAPI = drive.DriveApi(authenticateClient);
@@ -33,6 +33,7 @@ class DriveUtils {
 
     final List<List<String>> table = [];
     final rows = csvString.split('\n');
+    rows.removeAt(0);
     final colLength = rows.length;
     for (var i = 0; i < colLength; i++) {
       final List<String> splitRow = rows[i].split(",");

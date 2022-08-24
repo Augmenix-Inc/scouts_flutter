@@ -24,16 +24,18 @@ class _LoginState extends State<Login> {
                     "An unexpected error has occured while signing in with Google, please try again."),
                 actions: [
                   TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text("Continue")),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Continue"),
+                  ),
                   TextButton(
-                      onPressed: () async {
-                        Navigator.pop(context);
-                        await initiateLogin();
-                      },
-                      child: const Text("Try again"))
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      await initiateLogin();
+                    },
+                    child: const Text("Try again"),
+                  ),
                 ],
               ));
       return;
@@ -42,8 +44,15 @@ class _LoginState extends State<Login> {
     // Initialise drive and download main sheet
     await initApp();
 
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const Home()));
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MaterialApp(
+                  theme: lightTheme,
+                  darkTheme: darkTheme,
+                  home: const Home(),
+                )),
+        (route) => false);
   }
 
   @override
@@ -57,56 +66,58 @@ class _LoginState extends State<Login> {
       theme: lightTheme,
       darkTheme: darkTheme,
       home: Scaffold(
-          body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "The Stacked Portal",
-              style: theme.textTheme.displayLarge!
-                  .copyWith(color: theme.colorScheme.primary)
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 50),
-            Image.asset(
-              "assets/logo.jpg",
-              height: 250,
-              fit: BoxFit.fitHeight,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Text(
-              "To get started, login with your School's Gmail account.",
-              style: theme.textTheme.bodyLarge,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "The Stacked Portal",
+                style: theme.textTheme.displayLarge!
+                    .copyWith(color: theme.colorScheme.primary)
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 50),
+              Image.asset(
+                "assets/logo.jpg",
+                height: 250,
+                fit: BoxFit.fitHeight,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                "To get started, login with your School's Gmail account.",
+                style: theme.textTheme.bodyLarge,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
                 onPressed: initiateLogin,
                 style: ButtonStyle(
-                    elevation: MaterialStateProperty.all(0),
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent),
-                    overlayColor: MaterialStateProperty.resolveWith((states) {
-                      if (states.contains(MaterialState.hovered)) {
-                        return signInBtnColorScheme.primaryContainer
-                            .withOpacity(0.08);
-                      } else if (states.contains(MaterialState.focused) ||
-                          states.contains(MaterialState.pressed)) {
-                        return signInBtnColorScheme.primaryContainer
-                            .withOpacity(0.12);
-                      }
-                      return Colors.transparent;
-                    }),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
+                  elevation: MaterialStateProperty.all(0),
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.transparent),
+                  overlayColor: MaterialStateProperty.resolveWith((states) {
+                    if (states.contains(MaterialState.hovered)) {
+                      return signInBtnColorScheme.primaryContainer
+                          .withOpacity(0.08);
+                    } else if (states.contains(MaterialState.focused) ||
+                        states.contains(MaterialState.pressed)) {
+                      return signInBtnColorScheme.primaryContainer
+                          .withOpacity(0.12);
+                    }
+                    return Colors.transparent;
+                  }),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                       side: BorderSide(
                           color: signInBtnColorScheme.primary, width: 2),
-                    ))),
+                    ),
+                  ),
+                ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -123,10 +134,12 @@ class _LoginState extends State<Login> {
                           .copyWith(color: signInBtnColorScheme.primary),
                     )
                   ],
-                ))
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
