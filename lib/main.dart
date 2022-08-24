@@ -4,13 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/drive/v3.dart' as drive;
 import 'package:scouts_flutter/firebase_options.dart';
+import 'package:scouts_flutter/home.dart';
 import 'package:scouts_flutter/login.dart';
 import 'package:scouts_flutter/theme.dart';
+import 'package:scouts_flutter/utilities/classes/mainsheet.dart';
 import 'package:scouts_flutter/utilities/driveutils.dart';
 
 final googleSignIn = GoogleSignIn(
   scopes: [drive.DriveApi.driveReadonlyScope],
 );
+
+Future<void> initApp() async {
+  // Initialise Google Drive API
+  await DriveUtils.initializeDrive();
+
+  final mainSheet = MainSheet();
+  await mainSheet.initUserSheets(googleSignIn.currentUser!.email);
+}
 
 void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -28,13 +38,13 @@ void main() async {
     return;
   }
 
-  // Initialise Google Drive API
-  await DriveUtils.initializeDrive();
+  // Initialise drive and download main sheet
+  await initApp();
 
   // Handle logged in situation
   runApp(MaterialApp(
     theme: lightTheme,
     darkTheme: darkTheme,
-    home: const Login(),
+    home: const Home(),
   ));
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:scouts_flutter/home.dart';
 import 'package:scouts_flutter/main.dart';
 import 'package:scouts_flutter/theme.dart';
-import 'package:scouts_flutter/utilities/classes/mainsheet.dart';
-import 'package:scouts_flutter/utilities/driveutils.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -40,11 +39,11 @@ class _LoginState extends State<Login> {
       return;
     }
 
-    // Initialise Google Drive API
-    await DriveUtils.initializeDrive();
+    // Initialise drive and download main sheet
+    await initApp();
 
-    final mainSheet = MainSheet();
-    await mainSheet.initUserSheets(googleSignIn.currentUser!.email);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const Home()));
   }
 
   @override

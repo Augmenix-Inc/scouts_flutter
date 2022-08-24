@@ -14,7 +14,6 @@ class DriveUtils {
     final authHeaders = await googleSignIn.currentUser!.authHeaders;
     final authenticateClient = AuthenticateClient(authHeaders, Client());
     driveAPI = drive.DriveApi(authenticateClient);
-    print("Got drive api");
     mainTable = await getCSV("1v9ItNHslIZbQCRPdur5u30ITOvj-QXzrAXlZMjNEpLA");
   }
 
@@ -22,7 +21,6 @@ class DriveUtils {
     final drive.Media driveFile = (await driveAPI.files.export(
         fileId, "text/csv",
         downloadOptions: drive.DownloadOptions.fullMedia)) as drive.Media;
-    print("Got csv");
     final List<int> fileData = [];
     await driveFile.stream.listen((data) {
       fileData.addAll(data);
