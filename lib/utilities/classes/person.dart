@@ -32,7 +32,6 @@ class Person {
       required String progressURL,
       required String eventURL,
       required String uaURL}) async {
-        print(progressURL);
     final fileId = progressURL.substring(39, progressURL.length - 17);
     final progressTable = await DriveUtils.getCSV(fileId);
     final List<Progress> progress = [];
