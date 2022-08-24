@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
         children: [
           // Menu Bar -> Shift to a widgets so that it can be reused
           Container(
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.primaryContainer,
             height: 50,
             padding: const EdgeInsets.only(left: 10),
             child: Row(
@@ -32,16 +32,28 @@ class _HomeState extends State<Home> {
                   child: Text(
                     "UNIT",
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.button!.color),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: Text("BADGES"),
+                  child: Text(
+                    "BADGES",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: Text("MY SCOUTING JOURNEY"),
+                  child: Text(
+                    "MY SCOUTING JOURNEY",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  
+                  ),
                 ),
                 const Spacer(),
               ],

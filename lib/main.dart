@@ -14,19 +14,21 @@ import 'package:scouts_flutter/utilities/driveutils.dart';
 final googleSignIn = GoogleSignIn(
   scopes: [drive.DriveApi.driveReadonlyScope],
 );
-late final Person userPerson;
+MainSheet? mainSheet;
+Person? userPerson;
 
 Future<void> initApp() async {
   // Initialise Google Drive API
   await DriveUtils.initializeDrive();
 
   // Download main sheet
-  final mainSheet = MainSheet();
-  await mainSheet.initUserSheets();
+  mainSheet = MainSheet();
+  await mainSheet!.initUserSheets();
 
   // Get person details for user
   // TODO: using richard's email temporarily
-  userPerson = await mainSheet.getPersonWithEmail("tan_yu_zhe_richard@s2020.ssts.edu.sg");
+  userPerson = await mainSheet!
+      .getPersonWithEmail("tan_yu_zhe_richard@s2020.ssts.edu.sg");
 }
 
 void main() async {
