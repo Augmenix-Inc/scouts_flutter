@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/drive/v3.dart' as drive;
 import 'package:http/http.dart';
 import 'package:scouts_flutter/authenticated_client.dart';
+import 'package:scouts_flutter/main.dart';
 
 class DriveUtils {
   static const utf8Decoder = Utf8Decoder(allowMalformed: true);
@@ -11,10 +11,10 @@ class DriveUtils {
   static late final List<List<String>> mainTable;
 
   static Future<void> initializeDrive() async {
-    final googleSignIn = GoogleSignIn();
     final authHeaders = await googleSignIn.currentUser!.authHeaders;
     final authenticateClient = AuthenticateClient(authHeaders, Client());
     driveAPI = drive.DriveApi(authenticateClient);
+    print("Got drive api");
     mainTable = await getCSV("1v9ItNHslIZbQCRPdur5u30ITOvj-QXzrAXlZMjNEpLA");
   }
 
@@ -22,6 +22,7 @@ class DriveUtils {
     final drive.Media driveFile = (await driveAPI.files.export(
         fileId, "text/csv",
         downloadOptions: drive.DownloadOptions.fullMedia)) as drive.Media;
+    print("Got csv");
     final List<int> fileData = [];
     await driveFile.stream.listen((data) {
       fileData.addAll(data);

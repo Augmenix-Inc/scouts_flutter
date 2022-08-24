@@ -7,6 +7,7 @@ class AuthenticateClient extends http.BaseClient {
 
   AuthenticateClient(this.headers, this.client);
 
+  @override
   Future<http.StreamedResponse> send(http.BaseRequest request) {
     return client.send(request..headers.addAll(headers));
   }

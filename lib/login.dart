@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:googleapis/drive/v3.dart' as drive;
-import 'package:http/http.dart';
-import 'package:scouts_flutter/authenticated_client.dart';
+import 'package:scouts_flutter/main.dart';
 import 'package:scouts_flutter/theme.dart';
+import 'package:scouts_flutter/utilities/classes/mainsheet.dart';
 import 'package:scouts_flutter/utilities/driveutils.dart';
 
 class Login extends StatefulWidget {
@@ -16,10 +14,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   Future<void> initiateLogin() async {
-    final googleSignIn = GoogleSignIn(
-      scopes: [drive.DriveApi.driveReadonlyScope],
-    );
-
     final user = await googleSignIn.signIn();
 
     if (user == null) {
@@ -48,6 +42,9 @@ class _LoginState extends State<Login> {
 
     // Initialise Google Drive API
     await DriveUtils.initializeDrive();
+
+    final mainSheet = MainSheet();
+    await mainSheet.initUserSheets(googleSignIn.currentUser!.email);
   }
 
   @override
