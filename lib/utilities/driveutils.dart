@@ -9,12 +9,16 @@ class DriveUtils {
   static const utf8Decoder = Utf8Decoder(allowMalformed: true);
   static late final drive.DriveApi driveAPI;
   static late final List<List<String>> mainTable;
+  static var _isInitialised = false;
 
   static Future<void> initializeDrive() async {
+    if (_isInitialised) return;
+    
     final authHeaders = await googleSignIn.currentUser!.authHeaders;
     final authenticateClient = AuthenticateClient(authHeaders, Client());
     driveAPI = drive.DriveApi(authenticateClient);
     mainTable = await getCSV("1v9ItNHslIZbQCRPdur5u30ITOvj-QXzrAXlZMjNEpLA");
+    _isInitialised = true;
   }
 
   static Future<List<List<String>>> getCSV(String fileId) async {
