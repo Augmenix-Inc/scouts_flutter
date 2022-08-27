@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scouts_flutter/badges.dart';
 import 'package:scouts_flutter/main.dart';
 
 class Home extends StatefulWidget {
@@ -38,7 +39,12 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Badges()),
+                    );
+                  },
                   child: Text(
                     "BADGES",
                     style: TextStyle(

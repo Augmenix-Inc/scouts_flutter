@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scouts_flutter/home.dart';
 import 'package:scouts_flutter/main.dart';
+import 'package:scouts_flutter/badges.dart';
 
 class Badges extends StatefulWidget {
   const Badges({Key? key}) : super(key: key);
@@ -29,7 +31,9 @@ class _BadgesState extends State<Badges> {
                 ),
                 const Spacer(),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Text(
                     "UNIT",
                     style: TextStyle(
