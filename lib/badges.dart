@@ -64,6 +64,54 @@ class _BadgesState extends State<Badges> {
             ),
           ),
           // Menu Bar Ends Here
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(top: 40),
+              child: Column(
+                children: [
+                  Text(
+                    "Badges",
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayLarge!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
+                  ),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: (GridView.builder(
+                        itemCount: userPerson!.progress.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                          mainAxisExtent: 200,
+                          maxCrossAxisExtent: 200,
+                        ),
+                        itemBuilder: (context, index) {
+                          final achievements = userPerson!.progress;
+                          return Card(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Image.asset('assets/patrol/zetta.gif'),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(achievements[index].badgeName),
+                                const SizedBox(height: 20),
+                              ],
+                            ),
+                          );
+                        },
+                      )),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
