@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:scouts_flutter/badges.dart';
+import 'package:scouts_flutter/journey.dart';
 import 'package:scouts_flutter/main.dart';
+import 'package:scouts_flutter/unit.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,7 +32,12 @@ class _HomeState extends State<Home> {
                 ),
                 const Spacer(),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Unit()),
+                    );
+                  },
                   child: Text(
                     "UNIT",
                     style: TextStyle(
@@ -53,7 +60,12 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Journey()),
+                    );
+                  },
                   child: Text(
                     "MY SCOUTING JOURNEY",
                     style: TextStyle(
