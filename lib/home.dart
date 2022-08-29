@@ -117,11 +117,11 @@ class _HomeState extends State<Home> {
                                 padding: const EdgeInsets.all(10),
                                 child: Card(
                                   child: Row(children: [
-                                    const SizedBox(width: 20),
+                                    const SizedBox(width: 10),
                                     Padding(
                                       padding: const EdgeInsets.all(10),
                                       child: Image.asset(
-                                          'assets/patrol/zetta.gif'),
+                                          'assets/patrol/zetta.gif'), // TODO: Replace with actual image
                                     ),
                                     const SizedBox(width: 20),
                                     Column(
@@ -134,7 +134,7 @@ class _HomeState extends State<Home> {
                                         const SizedBox(height: 20),
                                       ],
                                     ),
-                                    const SizedBox(width: 20),
+                                    const SizedBox(width: 10),
                                   ]),
                                 ),
                               );
