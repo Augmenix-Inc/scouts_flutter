@@ -90,29 +90,61 @@ class _BadgesState extends State<Badges> {
                           maxCrossAxisExtent: 200,
                         ),
                         itemBuilder: (context, index) {
-                          final achievements = userPerson!.progress;
-                          // ignore: dead_code, dead_code
+                          final badges = userPerson!.progress;
                           return Card(
-                            // ignore: unnecessary_new
-                            child: new InkWell(
-                              onTap: () {
-                                //show badge description and badge icon here
-                                showDialog(
-                                context: context, 
-                                builder: (context) => AlertDialog(
-                                  title: Text(achievements[index].badgeName),
-                                  content: Image.asset('assets/patrol/zetta.gif'),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      child: Text("Close"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
+                              child: InkWell(
+                            onTap: () {
+                              //show badge description and badge icon here
+                              showDialog(
+                                context: context,
+                                builder: (context) => SimpleDialog(
+                                  // title: Text(achievements[index].badgeName),
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(20),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Image.asset(
+                                                "assets/patrol/zetta.gif",
+                                                height: 300,
+                                                width: 300,
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    badges[index].badgeName,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .displayLarge!
+                                                        .copyWith(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .primary),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            "REQUIREMENTS",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineMedium!
+                                                .copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary),
+                                          ),
+                                        ],
+                                      ),
+                                    )
                                   ],
                                 ),
-                                );
-                              },
+                              );
+                            },
                             child: Column(
                               children: [
                                 Padding(
@@ -121,7 +153,7 @@ class _BadgesState extends State<Badges> {
                                       'assets/patrol/zetta.gif'), // TODO: Replace with actual image
                                 ),
                                 const SizedBox(height: 10),
-                                Text(achievements[index].badgeName),
+                                Text(badges[index].badgeName),
                                 const SizedBox(height: 20),
                               ],
                             ),
