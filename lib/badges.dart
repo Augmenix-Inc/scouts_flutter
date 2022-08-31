@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:scouts_flutter/main.dart';
 
@@ -89,7 +91,28 @@ class _BadgesState extends State<Badges> {
                         ),
                         itemBuilder: (context, index) {
                           final achievements = userPerson!.progress;
+                          // ignore: dead_code, dead_code
                           return Card(
+                            // ignore: unnecessary_new
+                            child: new InkWell(
+                              onTap: () {
+                                //show badge description and badge icon here
+                                showDialog(
+                                context: context, 
+                                builder: (context) => AlertDialog(
+                                  title: Text(achievements[index].badgeName),
+                                  content: Image.asset('assets/patrol/zetta.gif'),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Close"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                );
+                              },
                             child: Column(
                               children: [
                                 Padding(
@@ -102,7 +125,7 @@ class _BadgesState extends State<Badges> {
                                 const SizedBox(height: 20),
                               ],
                             ),
-                          );
+                          ));
                         },
                       )),
                     ),
