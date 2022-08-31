@@ -1,5 +1,4 @@
-// ignore_for_file: deprecated_member_use
-
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:scouts_flutter/main.dart';
 
@@ -106,11 +105,6 @@ class _BadgesState extends State<Badges> {
                                         children: [
                                           Row(
                                             children: [
-                                              Image.asset(
-                                                "assets/patrol/zetta.gif",
-                                                height: 300,
-                                                width: 300,
-                                              ),
                                               Column(
                                                 children: [
                                                   Text(
