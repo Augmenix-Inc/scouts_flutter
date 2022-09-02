@@ -99,13 +99,12 @@ class _HomeState extends State<Home> {
                         .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                   const SizedBox(height: 50),
-
-                  // Achievements
+                  //Badges
                   Text(
-                    "Achievements",
+                    "ACHIEVEMENTS",
                     style: Theme.of(context)
                         .textTheme
-                        .titleLarge!
+                        .headlineSmall!
                         .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                   const SizedBox(height: 25),
@@ -156,6 +155,16 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
+
+                  // BADGES
+                  Text(
+                    "BADGES",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
+                  ),
+                  const SizedBox(height: 25),
                 ],
               ),
             ),
