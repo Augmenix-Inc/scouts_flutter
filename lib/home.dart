@@ -165,6 +165,27 @@ class _HomeState extends State<Home> {
                         .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                   const SizedBox(height: 25),
+                  Expanded(
+                          child: GridView.builder(
+                            itemCount: 2,
+                            gridDelegate:
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 20,
+                              mainAxisExtent: 150,
+                              maxCrossAxisExtent: 500,
+                            ),
+                            itemBuilder: (context, index) {
+                              final progress = userPerson!.progress;
+                              return Container(
+                                padding: const EdgeInsets.all(10),
+                                child: const Card(
+                                  child: Text("Hi")
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                 ],
               ),
             ),
