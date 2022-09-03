@@ -155,7 +155,7 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-
+                  const SizedBox(height: 50),
                   // BADGES
                   Text(
                     "BADGES",
@@ -166,26 +166,36 @@ class _HomeState extends State<Home> {
                   ),
                   const SizedBox(height: 25),
                   Expanded(
-                          child: GridView.builder(
-                            itemCount: 2,
-                            gridDelegate:
-                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 20,
-                              mainAxisExtent: 150,
-                              maxCrossAxisExtent: 500,
-                            ),
-                            itemBuilder: (context, index) {
-                              final progress = userPerson!.progress;
-                              return Container(
-                                padding: const EdgeInsets.all(10),
-                                child: const Card(
-                                  child: Text("Hi")
+                    child: GridView.builder(
+                      itemCount: 2,
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
+                        mainAxisExtent: 150,
+                        maxCrossAxisExtent: 500,
+                      ),
+                      itemBuilder: (context, index) {
+                        final progress = userPerson!.progress;
+                        return Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Card(
+                            child: Row(
+                              children: [
+                                Image.asset('assets/patrol/zetta.gif'),
+                                Column(
+                                  children: [
+                                    Text(progress[index].badgeName),
+                                    Text(progress[index].dateCompletion),
+                                  ],
                                 ),
-                              );
-                            },
+                              ],
+                            ),
                           ),
-                        ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
