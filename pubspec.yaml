@@ -41,6 +41,8 @@ dependencies:
   google_sign_in: ^5.4.1
   http: ^0.13.5
 
+  percent_indicator: ^4.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,8 +70,6 @@ flutter:
     - assets/gdrivelogo.svg
     - assets/tick_mark.svg
     - assets/circle.svg
-
-
 
     # Patrols
     - assets/patrol/exa.gif

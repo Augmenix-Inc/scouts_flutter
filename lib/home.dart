@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:scouts_flutter/badges.dart';
 import 'package:scouts_flutter/journey.dart';
 import 'package:scouts_flutter/main.dart';
@@ -187,6 +188,16 @@ class _HomeState extends State<Home> {
                                   children: [
                                     Text(progress[index].badgeName),
                                     Text(progress[index].dateCompletion),
+                                    LinearPercentIndicator(
+                                      width: 140.0,
+                                      lineHeight: 14.0,
+                                      animation: true,
+                                      animationDuration: 2000,
+                                      percent: 0.5,
+                                      barRadius: const Radius.circular(20),
+                                      backgroundColor: Colors.grey,
+                                      progressColor: Colors.blue,
+                                    ),
                                   ],
                                 ),
                               ],
