@@ -5,6 +5,7 @@ import 'package:scouts_flutter/journey.dart';
 import 'package:scouts_flutter/main.dart';
 import 'package:scouts_flutter/unit.dart';
 
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -172,9 +173,9 @@ class _HomeState extends State<Home> {
                       gridDelegate:
                           const SliverGridDelegateWithMaxCrossAxisExtent(
                         crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
+                        mainAxisSpacing: 40,
                         mainAxisExtent: 150,
-                        maxCrossAxisExtent: 500,
+                        maxCrossAxisExtent: 1000,
                       ),
                       itemBuilder: (context, index) {
                         final progress = userPerson!.progress;
@@ -186,17 +187,17 @@ class _HomeState extends State<Home> {
                                 Image.asset('assets/patrol/zetta.gif'),
                                 Column(
                                   children: [
-                                    Text(progress[index].badgeName),
+                                    Text(progress[index].badgeName, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
                                     Text(progress[index].dateCompletion),
                                     LinearPercentIndicator(
-                                      width: 140.0,
+                                      width: 500.0,
                                       lineHeight: 14.0,
                                       animation: true,
                                       animationDuration: 2000,
                                       percent: 0.5,
                                       barRadius: const Radius.circular(20),
                                       backgroundColor: Colors.grey,
-                                      progressColor: Colors.blue,
+                                      progressColor: Colors.green,
                                     ),
                                   ],
                                 ),
