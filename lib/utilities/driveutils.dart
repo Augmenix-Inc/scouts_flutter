@@ -17,11 +17,13 @@ class DriveUtils {
     final authHeaders = await googleSignIn.currentUser!.authHeaders;
     final authenticateClient = AuthenticateClient(authHeaders, Client());
     driveAPI = drive.DriveApi(authenticateClient);
-    mainTable = await getCSV("1v9ItNHslIZbQCRPdur5u30ITOvj-QXzrAXlZMjNEpLA");
+    mainTable = await getCSV("https://docs.google.com/spreadsheets/d/1v9ItNHslIZbQCRPdur5u30ITOvj-QXzrAXlZMjNEpLA/edit?usp=sharing");
     _isInitialised = true;
   }
 
-  static Future<List<List<String>>> getCSV(String fileId) async {
+  static Future<List<List<String>>> getCSV(String url) async {
+    final uri = Uri.parse(url);
+    final fileId = uri.pathSegments[2];
     final drive.Media driveFile = (await driveAPI.files.export(
         fileId, "text/csv",
         downloadOptions: drive.DownloadOptions.fullMedia)) as drive.Media;
@@ -30,20 +32,20 @@ class DriveUtils {
       fileData.addAll(data);
     }).asFuture();
     final csvString = utf8Decoder.convert(fileData);
-
-    final List<List<String>> table = [];
-    final rows = csvString.split('\n');
+    final List<List<String>> table =  [];
+    final rows = csvString.split('\r\n');
     rows.removeAt(0);
-    final colLength = rows.length;
-    for (var i = 0; i < colLength; i++) {
+    final numRows = rows.length;
+    for (var i = 0; i < numRows; i++) {
       final List<String> splitRow = rows[i].split(",");
-      final rowLength = splitRow.length;
-      for (var j = 0; j < rowLength; j++) {
+      final numColumns = splitRow.length;
+      for (var j = 0; j < numColumns; j++) {
         if (i == 0) {
-          table.add([splitRow[j]]);
+          table.add([splitRow[j].replaceAll("/;", ",")]);
           continue;
         }
-        table[j].add(splitRow[j]);
+        table[j].add(splitRow[j].replaceAll("/;", ","));
+        // print("added ${splitRow[j].replaceAll("/;", ",")}");
       }
     }
 

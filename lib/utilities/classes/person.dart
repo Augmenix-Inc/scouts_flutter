@@ -32,8 +32,7 @@ class Person {
       required String progressURL,
       required String eventURL,
       required String uaURL}) async {
-    final fileId = progressURL.substring(39, progressURL.length - 17);
-    final progressTable = await DriveUtils.getCSV(fileId);
+    final progressTable = await DriveUtils.getCSV(progressURL);
     final List<Progress> progress = [];
     final badgeNames = progressTable[0];
     final badgeIcons = progressTable[1];
@@ -42,7 +41,7 @@ class Person {
     final badgeAcquiredList = progressTable[4];
     final dateCompletionList = progressTable[5];
     for (var i = 0; i < badgeNames.length; i++) {
-      progress.add(Progress(
+      progress.add(await Progress.init(
           badgeName: badgeNames[i],
           badgeIcon: badgeIcons[i],
           requirementsURL: requirementURLs[i],
