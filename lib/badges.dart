@@ -132,6 +132,26 @@ class _BadgesState extends State<Badges> {
                                                         .colorScheme
                                                         .primary),
                                           ),
+                                          ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: badges[index]
+                                                .requirements
+                                                .length,
+                                            itemBuilder: (context, index) {
+                                              return Text(
+                                                badges[index]
+                                                    .requirements[index]
+                                                    .requirement,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium!
+                                                    .copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary),
+                                              );
+                                            },
+                                          ),
                                         ],
                                       ),
                                     )
