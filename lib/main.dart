@@ -28,7 +28,7 @@ Future<void> initApp() async {
   // Get person details for user
   // TODO: using richard's email temporarily
   userPerson = await mainSheet!
-      .getPersonWithEmail("tan_yu_zhe_richard@s2020.ssts.edu.sg");
+      .getPersonWithEmail(googleSignIn.currentUser!.email);
 }
 
 void main() async {

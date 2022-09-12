@@ -45,7 +45,7 @@ class DriveUtils {
           continue;
         }
         table[j].add(splitRow[j].replaceAll("/;", ","));
-        // print("added ${splitRow[j].replaceAll("/;", ",")}");
+        print("added ${splitRow[j].replaceAll("/;", ",")}");
       }
     }
 

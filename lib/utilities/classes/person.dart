@@ -41,6 +41,9 @@ class Person {
     final badgeAcquiredList = progressTable[4];
     final dateCompletionList = progressTable[5];
     for (var i = 0; i < badgeNames.length; i++) {
+      // TODO: temporary fix
+      if (requirementsCompletionURLs[i] == "") continue;
+
       progress.add(await Progress.init(
           badgeName: badgeNames[i],
           badgeIcon: badgeIcons[i],
