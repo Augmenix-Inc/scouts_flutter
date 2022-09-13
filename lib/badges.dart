@@ -144,96 +144,93 @@ class _BadgesState extends State<Badges> {
                             onTap: () {
                               //show badge description and badge icon here
                               showDialog(
-                                context: context,
-                                builder: (context) => SizedBox(
-                                  height: 400,
-                                  width: 400,
-                                  child: SingleChildScrollView(
-                                    // title: Text(achievements[index].badgeName),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(20),
-                                      child: Column(
-                                        children: [
-                                          Row(
+                                  context: context,
+                                  builder: (context) => Dialog(
+                                        child: Container(
+                                          height: 400,
+                                          width: 400,
+                                          color: Colors.red,
+                                          padding: const EdgeInsets.all(20),
+                                          child: ListView(
                                             children: [
-                                              const Spacer(),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 20),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: SvgPicture.asset(
-                                                    "assets/close_x.svg",
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Column(
+                                              Row(
                                                 children: [
-                                                  Text(
-                                                    badges[index].badgeName,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .displayLarge!
-                                                        .copyWith(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .primary),
+                                                  const Spacer(),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 20),
+                                                    child: ElevatedButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: SvgPicture.asset(
+                                                        "assets/close_x.svg",
+                                                      ),
+                                                    ),
                                                   ),
-                                                  Text(badges[index]
-                                                              .dateCompletion !=
-                                                          '-'
-                                                      ? "You acquired on ${badges[index].dateCompletion}"
-                                                      : "You do not have this badge")
                                                 ],
                                               ),
+                                              Row(
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      Text(
+                                                        badges[index].badgeName,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .displayLarge!
+                                                            .copyWith(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .primary),
+                                                      ),
+                                                      Text(badges[index]
+                                                                  .dateCompletion !=
+                                                              '-'
+                                                          ? "You acquired on ${badges[index].dateCompletion}"
+                                                          : "You do not have this badge"),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Text(
+                                                "REQUIREMENTS",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineMedium!
+                                                    .copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary),
+                                              ),
+                                              ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount: badges[index]
+                                                    .requirements
+                                                    .length,
+                                                itemBuilder: (context, count) {
+                                                  return Row(
+                                                    children: [
+                                                      SvgPicture.asset(badges[
+                                                                  index]
+                                                              .requirements[
+                                                                  count]
+                                                              .completed
+                                                          ? "assets/tick_mark.svg"
+                                                          : "assets/circle.svg"),
+                                                      Text(badges[index]
+                                                          .requirements[count]
+                                                          .requirement)
+                                                    ],
+                                                  );
+                                                },
+                                              ),
                                             ],
                                           ),
-                                          Text(
-                                            "REQUIREMENTS",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineMedium!
-                                                .copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .primary),
-                                          ),
-                                          SizedBox(
-                                            height: 250,
-                                            child: ListView.builder(
-                                              itemCount: badges[index]
-                                                  .requirements
-                                                  .length,
-                                              itemBuilder: (context, count) {
-                                                return Row(
-                                                  children: [
-                                                    SvgPicture.asset(badges[
-                                                                index]
-                                                            .requirements[count]
-                                                            .completed
-                                                        ? "assets/tick_mark.svg"
-                                                        : "assets/circle.svg"),
-                                                    Text(badges[index]
-                                                        .requirements[count]
-                                                        .requirement)
-                                                  ],
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
+                                        ),
+                                      ));
                             },
                             child: Column(
                               children: [
