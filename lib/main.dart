@@ -27,12 +27,11 @@ Future<void> initApp() async {
 
   // Get person details for user
   // TODO: using richard's email temporarily
-  userPerson = await mainSheet!
-      .getPersonWithEmail(googleSignIn.currentUser!.email);
+  userPerson =
+      await mainSheet!.getPersonWithEmail(googleSignIn.currentUser!.email);
 }
 
 void main() async {
-  await googleSignIn.signIn();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // For debugging purposes, set persistence to tab/session only

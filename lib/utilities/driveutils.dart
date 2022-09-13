@@ -17,7 +17,8 @@ class DriveUtils {
     final authHeaders = await googleSignIn.currentUser!.authHeaders;
     final authenticateClient = AuthenticateClient(authHeaders, Client());
     driveAPI = drive.DriveApi(authenticateClient);
-    mainTable = await getCSV("https://docs.google.com/spreadsheets/d/1v9ItNHslIZbQCRPdur5u30ITOvj-QXzrAXlZMjNEpLA/edit?usp=sharing");
+    mainTable = await getCSV(
+        "https://docs.google.com/spreadsheets/d/1v9ItNHslIZbQCRPdur5u30ITOvj-QXzrAXlZMjNEpLA/edit?usp=sharing");
     _isInitialised = true;
   }
 
@@ -32,7 +33,7 @@ class DriveUtils {
       fileData.addAll(data);
     }).asFuture();
     final csvString = utf8Decoder.convert(fileData);
-    final List<List<String>> table =  [];
+    final List<List<String>> table = [];
     final rows = csvString.split('\r\n');
     rows.removeAt(0);
     final numRows = rows.length;
@@ -45,7 +46,7 @@ class DriveUtils {
           continue;
         }
         table[j].add(splitRow[j].replaceAll("/;", ","));
-        print("added ${splitRow[j].replaceAll("/;", ",")}");
+        //print("added ${splitRow[j].replaceAll("/;", ",")}");
       }
     }
 

@@ -96,10 +96,11 @@ class _BadgesState extends State<Badges> {
                               //show badge description and badge icon here
                               showDialog(
                                 context: context,
-                                builder: (context) => SimpleDialog(
-                                  // title: Text(achievements[index].badgeName),
-                                  children: [
-                                    Container(
+                                builder: (context) => SizedBox(
+                                  height: 400,
+                                  child: SingleChildScrollView(
+                                    // title: Text(achievements[index].badgeName),
+                                    child: Container(
                                       padding: const EdgeInsets.all(20),
                                       child: Column(
                                         children: [
@@ -132,30 +133,10 @@ class _BadgesState extends State<Badges> {
                                                         .colorScheme
                                                         .primary),
                                           ),
-                                          ListView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: badges[index]
-                                                .requirements
-                                                .length,
-                                            itemBuilder: (context, index) {
-                                              return Text(
-                                                badges[index]
-                                                    .requirements[index]
-                                                    .requirement,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyMedium!
-                                                    .copyWith(
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .primary),
-                                              );
-                                            },
-                                          ),
                                         ],
                                       ),
-                                    )
-                                  ],
+                                    ),
+                                  ),
                                 ),
                               );
                             },

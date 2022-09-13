@@ -12,6 +12,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  var load = false;
   Future<void> initiateLogin() async {
     final user = await googleSignIn.signIn();
 
@@ -40,7 +41,9 @@ class _LoginState extends State<Login> {
               ));
       return;
     }
-
+    setState(() {
+      load = true;
+    });
     // Initialise drive and download main sheet
     await initApp();
 
@@ -64,76 +67,79 @@ class _LoginState extends State<Login> {
 
     return Scaffold(
       body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "The Stacked Portal",
-              style: theme.textTheme.displayLarge!
-                  .copyWith(color: theme.colorScheme.primary)
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 50),
-            Image.asset(
-              "assets/logo.jpg",
-              height: 250,
-              fit: BoxFit.fitHeight,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Text(
-              "To get started, login with your School's Gmail account.",
-              style: theme.textTheme.bodyLarge,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-              onPressed: initiateLogin,
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                overlayColor: MaterialStateProperty.resolveWith((states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return signInBtnColorScheme.primaryContainer
-                        .withOpacity(0.08);
-                  } else if (states.contains(MaterialState.focused) ||
-                      states.contains(MaterialState.pressed)) {
-                    return signInBtnColorScheme.primaryContainer
-                        .withOpacity(0.12);
-                  }
-                  return Colors.transparent;
-                }),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    side: BorderSide(
-                        color: signInBtnColorScheme.primary, width: 2),
-                  ),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
+        child: load
+            ? const Center(child: CircularProgressIndicator())
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(
-                    "assets/gdrivelogo.svg",
-                    height: 18,
+                  Text(
+                    "The Stacked Portal",
+                    style: theme.textTheme.displayLarge!
+                        .copyWith(color: theme.colorScheme.primary)
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 50),
+                  Image.asset(
+                    "assets/logo.jpg",
+                    height: 250,
+                    fit: BoxFit.fitHeight,
                   ),
                   const SizedBox(
-                    width: 6,
+                    height: 30,
                   ),
                   Text(
-                    "Sign in with Google Drive",
-                    style: theme.textTheme.bodyLarge!
-                        .copyWith(color: signInBtnColorScheme.primary),
-                  )
+                    "To get started, login with your School's Gmail account.",
+                    style: theme.textTheme.bodyLarge,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  ElevatedButton(
+                    onPressed: initiateLogin,
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(0),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                      overlayColor: MaterialStateProperty.resolveWith((states) {
+                        if (states.contains(MaterialState.hovered)) {
+                          return signInBtnColorScheme.primaryContainer
+                              .withOpacity(0.08);
+                        } else if (states.contains(MaterialState.focused) ||
+                            states.contains(MaterialState.pressed)) {
+                          return signInBtnColorScheme.primaryContainer
+                              .withOpacity(0.12);
+                        }
+                        return Colors.transparent;
+                      }),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          side: BorderSide(
+                              color: signInBtnColorScheme.primary, width: 2),
+                        ),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/gdrivelogo.svg",
+                          height: 18,
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                        Text(
+                          "Sign in with Google Drive",
+                          style: theme.textTheme.bodyLarge!
+                              .copyWith(color: signInBtnColorScheme.primary),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }
