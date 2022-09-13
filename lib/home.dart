@@ -33,12 +33,52 @@ class _HomeState extends State<Home> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset(
+                  'assets/logo.jpg',
+                  fit: BoxFit.cover,
+                  height: 40,
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    tabid == 0
+                        ? print("Im in home")
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Home()),
+                          );
+                  },
+                  child: Text(
+                    "HOME",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Badges()),
+                    );
+                  },
+                  child: Text(
+                    "BADGES",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+                const Spacer(),
                 ElevatedButton(
                   onPressed: () async {
                     await googleSignIn.signOut();
                     Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => const Login()),
+                        MaterialPageRoute(
+                          builder: (context) => const Login(),
+                        ),
                         (route) => false);
                   },
                   style: ButtonStyle(
@@ -65,7 +105,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   child: Text(
-                    "SIGN IN",
+                    "SIGN OUT",
                     style: TextStyle(
                       color: signInBtnColorScheme.primary,
                     ),
@@ -159,12 +199,13 @@ class _HomeState extends State<Home> {
                   const SizedBox(height: 50),
                   // BADGES
                   Text(
-                    "BADGES",
+                    "BADGES (TBC) ",
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge!
                         .copyWith(color: Theme.of(context).colorScheme.primary),
-                  ),
+                  )
+                  /*
                   const SizedBox(height: 25),
                   Expanded(
                     child: GridView.builder(
@@ -212,6 +253,7 @@ class _HomeState extends State<Home> {
                       },
                     ),
                   ),
+                  */
                 ],
               ),
             ),

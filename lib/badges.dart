@@ -1,5 +1,7 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:scouts_flutter/home.dart';
+import 'package:scouts_flutter/login.dart';
 import 'package:scouts_flutter/main.dart';
 
 class Badges extends StatefulWidget {
@@ -10,8 +12,13 @@ class Badges extends StatefulWidget {
 }
 
 class _BadgesState extends State<Badges> {
+  var tabid = 2;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final signInBtnColorScheme = ColorScheme.fromSeed(
+        seedColor: const Color.fromARGB(255, 226, 209, 15),
+        brightness: theme.brightness);
     return Scaffold(
       body: Column(
         children: [
@@ -31,34 +38,76 @@ class _BadgesState extends State<Badges> {
                 const Spacer(),
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    tabid == 0
+                        ? print("Im in home")
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Home()),
+                          );
                   },
                   child: Text(
-                    "UNIT",
+                    "HOME",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Badges()),
+                    );
+                  },
                   child: Text(
-                    "BADGES",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "MY SCOUTING JOURNEY",
+                    "Badges",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
                 const Spacer(),
+                ElevatedButton(
+                  onPressed: () async {
+                    await googleSignIn.signOut();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Login(),
+                        ),
+                        (route) => false);
+                  },
+                  style: ButtonStyle(
+                    elevation: MaterialStateProperty.all(0),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent),
+                    overlayColor: MaterialStateProperty.resolveWith((states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return signInBtnColorScheme.primaryContainer
+                            .withOpacity(0.08);
+                      } else if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return signInBtnColorScheme.primaryContainer
+                            .withOpacity(0.12);
+                      }
+                      return Colors.transparent;
+                    }),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: BorderSide(
+                            color: signInBtnColorScheme.primary, width: 2),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "SIGN OUT",
+                    style: TextStyle(
+                      color: signInBtnColorScheme.primary,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -98,12 +147,30 @@ class _BadgesState extends State<Badges> {
                                 context: context,
                                 builder: (context) => SizedBox(
                                   height: 400,
+                                  width: 400,
                                   child: SingleChildScrollView(
                                     // title: Text(achievements[index].badgeName),
                                     child: Container(
                                       padding: const EdgeInsets.all(20),
                                       child: Column(
                                         children: [
+                                          Row(
+                                            children: [
+                                              const Spacer(),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 20),
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: SvgPicture.asset(
+                                                    "assets/close_x.svg",
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                           Row(
                                             children: [
                                               Column(
@@ -119,6 +186,11 @@ class _BadgesState extends State<Badges> {
                                                                 .colorScheme
                                                                 .primary),
                                                   ),
+                                                  Text(badges[index]
+                                                              .dateCompletion !=
+                                                          '-'
+                                                      ? "You acquired on ${badges[index].dateCompletion}"
+                                                      : "You do not have this badge")
                                                 ],
                                               ),
                                             ],
@@ -132,6 +204,29 @@ class _BadgesState extends State<Badges> {
                                                     color: Theme.of(context)
                                                         .colorScheme
                                                         .primary),
+                                          ),
+                                          SizedBox(
+                                            height: 250,
+                                            child: ListView.builder(
+                                              itemCount: badges[index]
+                                                  .requirements
+                                                  .length,
+                                              itemBuilder: (context, count) {
+                                                return Row(
+                                                  children: [
+                                                    SvgPicture.asset(badges[
+                                                                index]
+                                                            .requirements[count]
+                                                            .completed
+                                                        ? "assets/tick_mark.svg"
+                                                        : "assets/circle.svg"),
+                                                    Text(badges[index]
+                                                        .requirements[count]
+                                                        .requirement)
+                                                  ],
+                                                );
+                                              },
+                                            ),
                                           ),
                                         ],
                                       ),
