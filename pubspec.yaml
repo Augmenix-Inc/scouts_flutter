@@ -68,8 +68,6 @@ flutter:
   assets:
     - assets/logo.jpg
     - assets/gdrivelogo.svg
-    - assets/tick_mark.svg
-    - assets/circle.svg
 
     # Patrols
     - assets/patrol/exa.gif

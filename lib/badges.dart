@@ -1,8 +1,10 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:scouts_flutter/home.dart';
+import 'package:scouts_flutter/journey.dart';
 import 'package:scouts_flutter/login.dart';
 import 'package:scouts_flutter/main.dart';
+import 'package:scouts_flutter/unit.dart';
 
 class Badges extends StatefulWidget {
   const Badges({Key? key}) : super(key: key);
@@ -39,7 +41,7 @@ class _BadgesState extends State<Badges> {
                 TextButton(
                   onPressed: () {
                     tabid == 0
-                        ? print("Im in home")
+                        ? null
                         : Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -55,13 +57,50 @@ class _BadgesState extends State<Badges> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Badges()),
-                    );
+                    tabid == 1
+                        ? null
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Unit()),
+                          );
                   },
                   child: Text(
-                    "Badges",
+                    "UNIT",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    tabid == 2
+                        ? null
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Badges()),
+                          );
+                  },
+                  child: Text(
+                    "BADGES",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    tabid == 3
+                        ? null
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Journey()),
+                          );
+                  },
+                  child: Text(
+                    "JOURNEY",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                     ),
@@ -147,8 +186,8 @@ class _BadgesState extends State<Badges> {
                                   context: context,
                                   builder: (context) => Dialog(
                                         child: Container(
-                                          height: 400,
-                                          width: 400,
+                                          height: 600,
+                                          width: 900,
                                           color: Colors.red,
                                           padding: const EdgeInsets.all(20),
                                           child: ListView(
@@ -173,6 +212,13 @@ class _BadgesState extends State<Badges> {
                                               ),
                                               Row(
                                                 children: [
+                                                  const Spacer(),
+                                                  Image.asset(
+                                                    "assets/patrol/zetta.gif",
+                                                    height: 200,
+                                                    width: 200,
+                                                  ),
+                                                  const SizedBox(width: 20),
                                                   Column(
                                                     children: [
                                                       Text(
@@ -189,10 +235,11 @@ class _BadgesState extends State<Badges> {
                                                       Text(badges[index]
                                                                   .dateCompletion !=
                                                               '-'
-                                                          ? "You acquired on ${badges[index].dateCompletion}"
+                                                          ? "You acquired this badge on ${badges[index].dateCompletion}"
                                                           : "You do not have this badge"),
                                                     ],
                                                   ),
+                                                  const Spacer(),
                                                 ],
                                               ),
                                               Text(

@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
                 TextButton(
                   onPressed: () {
                     tabid == 0
-                        ? print("Im in home")
+                        ? null
                         : Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -58,13 +58,50 @@ class _HomeState extends State<Home> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Badges()),
-                    );
+                    tabid == 1
+                        ? null
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Unit()),
+                          );
+                  },
+                  child: Text(
+                    "UNIT",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    tabid == 2
+                        ? null
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Badges()),
+                          );
                   },
                   child: Text(
                     "BADGES",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    tabid == 3
+                        ? null
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Journey()),
+                          );
+                  },
+                  child: Text(
+                    "JOURNEY",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                     ),
@@ -144,7 +181,6 @@ class _HomeState extends State<Home> {
                         .headlineSmall!
                         .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
-                  /*
                   const SizedBox(height: 25),
                   Expanded(
                     child: Row(
@@ -195,7 +231,6 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  */
                   const SizedBox(height: 50),
                   // BADGES
                   Text(
@@ -204,8 +239,7 @@ class _HomeState extends State<Home> {
                         .textTheme
                         .titleLarge!
                         .copyWith(color: Theme.of(context).colorScheme.primary),
-                  )
-                  /*
+                  ),
                   const SizedBox(height: 25),
                   Expanded(
                     child: GridView.builder(
@@ -253,7 +287,6 @@ class _HomeState extends State<Home> {
                       },
                     ),
                   ),
-                  */
                 ],
               ),
             ),
