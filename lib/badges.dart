@@ -1,5 +1,5 @@
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:scouts_flutter/home.dart';
 import 'package:scouts_flutter/journey.dart';
 import 'package:scouts_flutter/login.dart';
@@ -183,101 +183,129 @@ class _BadgesState extends State<Badges> {
                             onTap: () {
                               //show badge description and badge icon here
                               showDialog(
-                                  context: context,
-                                  builder: (context) => Dialog(
-                                        child: Container(
-                                          height: 600,
-                                          width: 900,
-                                          color: Colors.red,
-                                          padding: const EdgeInsets.all(20),
-                                          child: ListView(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  const Spacer(),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 20),
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: SvgPicture.asset(
-                                                        "assets/close_x.svg",
-                                                      ),
+                                context: context,
+                                builder: (context) => Dialog(
+                                  child: Container(
+                                    height: 600,
+                                    width: 900,
+                                    padding: const EdgeInsets.all(20),
+                                    child: ListView(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const Spacer(),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 20),
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors.transparent),
+                                                  shape:
+                                                      MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      side: const BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2),
                                                     ),
                                                   ),
-                                                ],
+                                                ),
+                                                child: Image.asset(
+                                                  'assets/cross.png',
+                                                  height: 20,
+                                                ),
                                               ),
-                                              Row(
-                                                children: [
-                                                  const Spacer(),
-                                                  Image.asset(
-                                                    "assets/patrol/zetta.gif",
-                                                    height: 200,
-                                                    width: 200,
-                                                  ),
-                                                  const SizedBox(width: 20),
-                                                  Column(
-                                                    children: [
-                                                      Text(
-                                                        badges[index].badgeName,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .displayLarge!
-                                                            .copyWith(
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .colorScheme
-                                                                    .primary),
-                                                      ),
-                                                      Text(badges[index]
-                                                                  .dateCompletion !=
-                                                              '-'
-                                                          ? "You acquired this badge on ${badges[index].dateCompletion}"
-                                                          : "You do not have this badge"),
-                                                    ],
-                                                  ),
-                                                  const Spacer(),
-                                                ],
-                                              ),
-                                              Text(
-                                                "REQUIREMENTS",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headlineMedium!
-                                                    .copyWith(
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .primary),
-                                              ),
-                                              ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount: badges[index]
-                                                    .requirements
-                                                    .length,
-                                                itemBuilder: (context, count) {
-                                                  return Row(
-                                                    children: [
-                                                      SvgPicture.asset(badges[
-                                                                  index]
-                                                              .requirements[
-                                                                  count]
-                                                              .completed
-                                                          ? "assets/tick_mark.svg"
-                                                          : "assets/circle.svg"),
-                                                      Text(badges[index]
-                                                          .requirements[count]
-                                                          .requirement)
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                      ));
+                                        Row(
+                                          children: [
+                                            const Spacer(),
+                                            Image.asset(
+                                              "assets/patrol/zetta.gif",
+                                              height: 200,
+                                              width: 200,
+                                            ),
+                                            const SizedBox(width: 20),
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  badges[index].badgeName,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displayLarge!
+                                                      .copyWith(
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .primary),
+                                                ),
+                                                LinearPercentIndicator(
+                                                  width: 500.0,
+                                                  lineHeight: 14.0,
+                                                  animation: true,
+                                                  animationDuration: 2000,
+                                                  percent: 0.5,
+                                                  barRadius:
+                                                      const Radius.circular(20),
+                                                  backgroundColor: Colors.grey,
+                                                  progressColor: Colors.green,
+                                                ),
+                                              ],
+                                            ),
+                                            const Spacer(),
+                                          ],
+                                        ),
+                                        Text(
+                                          "REQUIREMENTS",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineMedium!
+                                              .copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary),
+                                        ),
+                                        ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              badges[index].requirements.length,
+                                          itemBuilder: (context, count) {
+                                            return Row(
+                                              children: [
+                                                const SizedBox(width: 10),
+                                                Image.asset(
+                                                    badges[index]
+                                                            .requirements[count]
+                                                            .completed
+                                                        ? "assets/tick_mark.png"
+                                                        : "assets/circle.png",
+                                                    height: 25,
+                                                    width: 25),
+                                                const SizedBox(width: 10),
+                                                Expanded(
+                                                  child: Text(badges[index]
+                                                      .requirements[count]
+                                                      .requirement),
+                                                ),
+                                                const SizedBox(height: 30),
+                                              ],
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
                             },
                             child: Column(
                               children: [
