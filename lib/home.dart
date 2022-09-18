@@ -320,8 +320,27 @@ class _HomeState extends State<Home> {
                 ),
               ],
             )
+            
           : Column(
               children: [
+
+                        Text(
+                          userPerson!.name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayLarge!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        ),
+                        const SizedBox(height: 10),
+                                        Text(
+                          "SST Fearless Falcons Unit, Patrol ${userPerson!.patrol}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        ),
                 CarouselSlider(
                   items: [
                     Container(
@@ -358,6 +377,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
+                    
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
@@ -368,6 +388,7 @@ class _HomeState extends State<Home> {
                           end: Alignment.topRight,
                         ),
                       ),
+                      
                       child: Card(
                         child: Row(
                           children: [
@@ -377,6 +398,7 @@ class _HomeState extends State<Home> {
                               child: Image.asset(
                                   'assets/patrol/zetta.gif'), // TODO: Replace with actual image
                             ),
+                            
                             const SizedBox(width: 20),
                             Column(
                               children: [
