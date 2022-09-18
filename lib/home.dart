@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -30,6 +32,7 @@ class _HomeState extends State<Home> {
     final signInBtnColorScheme = ColorScheme.fromSeed(
         seedColor: const Color.fromARGB(255, 226, 209, 15),
         brightness: theme.brightness);
+    // ignore: dead_code, dead_code
     return Scaffold(
       body: isDesktop(context)
           ? Column(
@@ -444,11 +447,14 @@ class _HomeState extends State<Home> {
                               ],
                             ),
                             const SizedBox(width: 10),
+                            
                           ],
                         ),
                       ),
                     )
+                    
                   ],
+                  
                   options: CarouselOptions(
                     height: screenHeight / 2,
                     autoPlay: true,
@@ -460,8 +466,135 @@ class _HomeState extends State<Home> {
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
-              ],
-            ),
-    );
+                Text(
+                          "ACHIEVEMENTS (TBC) ",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        ),
+                        const SizedBox(height: 25),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: GridView.builder(
+                                  itemCount: 3,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithMaxCrossAxisExtent(
+                                    crossAxisSpacing: 20,
+                                    mainAxisSpacing: 20,
+                                    mainAxisExtent: 150,
+                                    maxCrossAxisExtent: 500,
+                                  ),
+                                  itemBuilder: (context, index) {
+                                    final achievements = userPerson!.progress;
+                                    return Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        gradient: const LinearGradient(
+                                          colors: [Colors.purple, Colors.blue],
+                                          begin: Alignment.bottomLeft,
+                                          end: Alignment.topRight,
+                                        ),
+                                      ),
+                                      child: Card(
+                                        child: Row(
+                                          children: [
+                                            const SizedBox(width: 10),
+                                            Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: Image.asset(
+                                                  'assets/patrol/zetta.gif'), // TODO: Replace with actual image
+                                            ),
+                                            const SizedBox(width: 20),
+                                            Column(
+                                              children: [
+                                                const SizedBox(height: 20),
+                                                Text(achievements[index]
+                                                    .badgeName),
+                                                const SizedBox(height: 20),
+                                                Text(achievements[index]
+                                                    .dateCompletion),
+                                                const SizedBox(height: 20),
+                                              ],
+                                            ),
+                                            const SizedBox(width: 10),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 50),
+                        // BADGES
+                        Text(
+                          "BADGES (TBC) ",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        ),
+                        const SizedBox(height: 25),
+                        Expanded(
+                          child: GridView.builder(
+                            itemCount: 2,
+                            gridDelegate:
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 40,
+                              mainAxisExtent: 150,
+                              maxCrossAxisExtent: 1000,
+                            ),
+                            itemBuilder: (context, index) {
+                              final progress = userPerson!.progress;
+                              return Container(
+                                padding: const EdgeInsets.all(10),
+                                child: Card(
+                                  child: Row(
+                                    children: [
+                                      Image.asset('assets/patrol/zetta.gif'),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            progress[index].badgeName,
+                                            style: const TextStyle(
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(progress[index].dateCompletion),
+                                          LinearPercentIndicator(
+                                            width: screenWidth / 3,
+                                            lineHeight: 14.0,
+                                            animation: true,
+                                            animationDuration: 2000,
+                                            percent: 0.5,
+                                            barRadius:
+                                                const Radius.circular(20),
+                                            backgroundColor: Colors.grey,
+                                            progressColor: Colors.green,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                );
+    
+    
   }
 }
