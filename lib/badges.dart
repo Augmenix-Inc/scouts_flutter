@@ -23,13 +23,13 @@ class _BadgesState extends State<Badges> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.width;
-    
+
     final theme = Theme.of(context);
     final signInBtnColorScheme = ColorScheme.fromSeed(
         seedColor: const Color.fromARGB(255, 226, 209, 15),
         brightness: theme.brightness);
     return Scaffold(
-      body: Column(
+      body: isDesktop(context) ? Column(
         children: [
           // Menu Bar -> Shift to a widgets so that it can be reused
           Container(
@@ -336,7 +336,7 @@ class _BadgesState extends State<Badges> {
             ),
           )
         ],
-      ),
+      ):Column(children: [Text("Hi")],)
     );
   }
 }
