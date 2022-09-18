@@ -16,14 +16,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var tabid = 0;
+
+  bool isDesktop(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 1300;
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.width;
+
     final theme = Theme.of(context);
     final signInBtnColorScheme = ColorScheme.fromSeed(
         seedColor: const Color.fromARGB(255, 226, 209, 15),
         brightness: theme.brightness);
     return Scaffold(
-      body: Column(
+      body: isDesktop(context) ? Column(
         children: [
           // Menu Bar -> Shift to a widgets so that it can be reused
           Container(
@@ -39,6 +46,7 @@ class _HomeState extends State<Home> {
                   height: 40,
                 ),
                 const Spacer(),
+                Text('$screenWidth'),
                 TextButton(
                   onPressed: () {
                     tabid == 0
@@ -277,7 +285,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     Text(progress[index].dateCompletion),
                                     LinearPercentIndicator(
-                                      width: 500.0,
+                                      width: screenWidth / 3,
                                       lineHeight: 14.0,
                                       animation: true,
                                       animationDuration: 2000,
@@ -300,7 +308,9 @@ class _HomeState extends State<Home> {
             ),
           ),
         ],
-      ),
+      ):Column(
+        children: [Text("...")],
+      )
     );
   }
 }
