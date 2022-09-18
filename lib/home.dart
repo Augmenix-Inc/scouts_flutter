@@ -200,6 +200,14 @@ class _HomeState extends State<Home> {
                               final achievements = userPerson!.progress;
                               return Container(
                                 padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: const LinearGradient(
+                                    colors: [Colors.purple, Colors.blue],
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                  ),
+                                ),
                                 child: Card(
                                   child: Row(
                                     children: [
