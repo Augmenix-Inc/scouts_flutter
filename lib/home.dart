@@ -51,7 +51,6 @@ class _HomeState extends State<Home> {
                         height: 40,
                       ),
                       const Spacer(),
-                      Text('$screenWidth'),
                       TextButton(
                         onPressed: () {
                           tabid == 0
@@ -323,278 +322,335 @@ class _HomeState extends State<Home> {
                 ),
               ],
             )
-            
-          : Column(
-              children: [
-
-                        Text(
-                          userPerson!.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    height: 50,
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(width: 10),
+                        InkWell(
+                          onTap: () {},
+                          child: Image.asset(
+                            'assets/cross.png',
+                            height: 20,
+                          ),
                         ),
-                        const SizedBox(height: 10),
-                                        Text(
-                          "SST Fearless Falcons Unit, Patrol ${userPerson!.patrol}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        ),
-                CarouselSlider(
-                  items: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: const LinearGradient(
-                          colors: [Colors.purple, Colors.blue],
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                        ),
-                      ),
-                      child: Card(
-                        child: Row(
-                          children: [
-                            const SizedBox(width: 10),
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Image.asset(
-                                  'assets/patrol/zetta.gif'), // TODO: Replace with actual image
-                            ),
-                            const SizedBox(width: 20),
-                            Column(
-                              children: [
-                                const SizedBox(height: 20),
-                                Text(userPerson!.progress[0].badgeName),
-                                const SizedBox(height: 20),
-                                Text(userPerson!.progress[0].dateCompletion),
-                                const SizedBox(height: 20),
-                              ],
-                            ),
-                            const SizedBox(width: 10),
-                          ],
-                        ),
-                      ),
-                    ),
-                    
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: const LinearGradient(
-                          colors: [Colors.purple, Colors.blue],
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                        ),
-                      ),
-                      
-                      child: Card(
-                        child: Row(
-                          children: [
-                            const SizedBox(width: 10),
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Image.asset(
-                                  'assets/patrol/zetta.gif'), // TODO: Replace with actual image
-                            ),
-                            
-                            const SizedBox(width: 20),
-                            Column(
-                              children: [
-                                const SizedBox(height: 20),
-                                Text(userPerson!.progress[1].badgeName),
-                                const SizedBox(height: 20),
-                                Text(userPerson!.progress[1].dateCompletion),
-                                const SizedBox(height: 20),
-                              ],
-                            ),
-                            const SizedBox(width: 10),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: const LinearGradient(
-                          colors: [Colors.purple, Colors.blue],
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                        ),
-                      ),
-                      child: Card(
-                        child: Row(
-                          children: [
-                            const SizedBox(width: 10),
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Image.asset(
-                                  'assets/patrol/zetta.gif'), // TODO: Replace with actual image
-                            ),
-                            const SizedBox(width: 20),
-                            Column(
-                              children: [
-                                const SizedBox(height: 20),
-                                Text(userPerson!.progress[2].badgeName),
-                                const SizedBox(height: 20),
-                                Text(userPerson!.progress[2].dateCompletion),
-                                const SizedBox(height: 20),
-                              ],
-                            ),
-                            const SizedBox(width: 10),
-                            
-                          ],
-                        ),
-                      ),
-                    )
-                    
-                  ],
-                  
-                  options: CarouselOptions(
-                    height: screenHeight / 2,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-                Text(
-                          "ACHIEVEMENTS (TBC) ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        ),
-                        const SizedBox(height: 25),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: GridView.builder(
-                                  itemCount: 3,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithMaxCrossAxisExtent(
-                                    crossAxisSpacing: 20,
-                                    mainAxisSpacing: 20,
-                                    mainAxisExtent: 150,
-                                    maxCrossAxisExtent: 500,
-                                  ),
-                                  itemBuilder: (context, index) {
-                                    final achievements = userPerson!.progress;
-                                    return Container(
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        gradient: const LinearGradient(
-                                          colors: [Colors.purple, Colors.blue],
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
-                                        ),
-                                      ),
-                                      child: Card(
-                                        child: Row(
-                                          children: [
-                                            const SizedBox(width: 10),
-                                            Padding(
-                                              padding: const EdgeInsets.all(10),
-                                              child: Image.asset(
-                                                  'assets/patrol/zetta.gif'), // TODO: Replace with actual image
-                                            ),
-                                            const SizedBox(width: 20),
-                                            Column(
-                                              children: [
-                                                const SizedBox(height: 20),
-                                                Text(achievements[index]
-                                                    .badgeName),
-                                                const SizedBox(height: 20),
-                                                Text(achievements[index]
-                                                    .dateCompletion),
-                                                const SizedBox(height: 20),
-                                              ],
-                                            ),
-                                            const SizedBox(width: 10),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
+                        const Spacer(),
+                        ElevatedButton(
+                          onPressed: () async {
+                            await googleSignIn.signOut();
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Login(),
                                 ),
+                                (route) => false);
+                          },
+                          style: ButtonStyle(
+                            elevation: MaterialStateProperty.all(0),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            overlayColor:
+                                MaterialStateProperty.resolveWith((states) {
+                              if (states.contains(MaterialState.hovered)) {
+                                return signInBtnColorScheme.primaryContainer
+                                    .withOpacity(0.08);
+                              } else if (states
+                                      .contains(MaterialState.focused) ||
+                                  states.contains(MaterialState.pressed)) {
+                                return signInBtnColorScheme.primaryContainer
+                                    .withOpacity(0.12);
+                              }
+                              return Colors.transparent;
+                            }),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                side: BorderSide(
+                                    color: signInBtnColorScheme.primary,
+                                    width: 2),
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            "SIGN OUT",
+                            style: TextStyle(
+                              color: signInBtnColorScheme.primary,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    userPerson!.name,
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayLarge!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "SST Fearless Falcons Unit, Patrol ${userPerson!.patrol}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
+                  ),
+                  const SizedBox(height: 50),
+                  Text(
+                    "ACHIEVEMENTS (TBC) ",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
+                  ),
+                  const SizedBox(height: 50),
+                  CarouselSlider(
+                    items: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: const LinearGradient(
+                            colors: [Colors.purple, Colors.blue],
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                          ),
+                        ),
+                        child: Card(
+                          child: Row(
+                            children: [
+                              const SizedBox(width: 10),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Image.asset(
+                                    'assets/patrol/zetta.gif'), // TODO: Replace with actual image
+                              ),
+                              const SizedBox(width: 20),
+                              Column(
+                                children: [
+                                  const SizedBox(height: 20),
+                                  Text(userPerson!.progress[0].badgeName),
+                                  const SizedBox(height: 20),
+                                  Text(userPerson!.progress[0].dateCompletion),
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
+                              const SizedBox(width: 10),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: const LinearGradient(
+                            colors: [Colors.purple, Colors.blue],
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                          ),
+                        ),
+                        child: Card(
+                          child: Row(
+                            children: [
+                              const SizedBox(width: 10),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Image.asset(
+                                    'assets/patrol/zetta.gif'), // TODO: Replace with actual image
+                              ),
+                              const SizedBox(width: 20),
+                              Column(
+                                children: [
+                                  const SizedBox(height: 20),
+                                  Text(userPerson!.progress[1].badgeName),
+                                  const SizedBox(height: 20),
+                                  Text(userPerson!.progress[1].dateCompletion),
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
+                              const SizedBox(width: 10),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: const LinearGradient(
+                            colors: [Colors.purple, Colors.blue],
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                          ),
+                        ),
+                        child: Card(
+                          child: Row(
+                            children: [
+                              const SizedBox(width: 10),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Image.asset(
+                                    'assets/patrol/zetta.gif'), // TODO: Replace with actual image
+                              ),
+                              const SizedBox(width: 20),
+                              Column(
+                                children: [
+                                  const SizedBox(height: 20),
+                                  Text(userPerson!.progress[2].badgeName),
+                                  const SizedBox(height: 20),
+                                  Text(userPerson!.progress[2].dateCompletion),
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
+                              const SizedBox(width: 10),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                    options: CarouselOptions(
+                      height: 200.0,
+                      aspectRatio: 4 / 3,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 3),
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                    ),
+                  ),
+                  const SizedBox(height: 50),
+                  Text(
+                    "BADGES (TBC) ",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
+                  ),
+                  const SizedBox(height: 25),
+                  CarouselSlider(
+                    items: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Card(
+                          child: Row(
+                            children: [
+                              Image.asset('assets/patrol/zetta.gif'),
+                              Column(
+                                children: [
+                                  Text(
+                                    userPerson!.progress[0].badgeName,
+                                    style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(userPerson!.progress[0].dateCompletion),
+                                  LinearPercentIndicator(
+                                    width: screenWidth / 3,
+                                    lineHeight: 14.0,
+                                    animation: true,
+                                    animationDuration: 2000,
+                                    percent: 0.5,
+                                    barRadius: const Radius.circular(20),
+                                    backgroundColor: Colors.grey,
+                                    progressColor: Colors.green,
+                                  ),
+                                ],
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 50),
-                        // BADGES
-                        Text(
-                          "BADGES (TBC) ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        ),
-                        const SizedBox(height: 25),
-                        Expanded(
-                          child: GridView.builder(
-                            itemCount: 2,
-                            gridDelegate:
-                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 40,
-                              mainAxisExtent: 150,
-                              maxCrossAxisExtent: 1000,
-                            ),
-                            itemBuilder: (context, index) {
-                              final progress = userPerson!.progress;
-                              return Container(
-                                padding: const EdgeInsets.all(10),
-                                child: Card(
-                                  child: Row(
-                                    children: [
-                                      Image.asset('assets/patrol/zetta.gif'),
-                                      Column(
-                                        children: [
-                                          Text(
-                                            progress[index].badgeName,
-                                            style: const TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(progress[index].dateCompletion),
-                                          LinearPercentIndicator(
-                                            width: screenWidth / 3,
-                                            lineHeight: 14.0,
-                                            animation: true,
-                                            animationDuration: 2000,
-                                            percent: 0.5,
-                                            barRadius:
-                                                const Radius.circular(20),
-                                            backgroundColor: Colors.grey,
-                                            progressColor: Colors.green,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Card(
+                          child: Row(
+                            children: [
+                              Image.asset('assets/patrol/zetta.gif'),
+                              Column(
+                                children: [
+                                  Text(
+                                    userPerson!.progress[1].badgeName,
+                                    style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                ),
-                              );
-                            },
+                                  Text(userPerson!.progress[1].dateCompletion),
+                                  LinearPercentIndicator(
+                                    width: screenWidth / 3,
+                                    lineHeight: 14.0,
+                                    animation: true,
+                                    animationDuration: 2000,
+                                    percent: 0.5,
+                                    barRadius: const Radius.circular(20),
+                                    backgroundColor: Colors.grey,
+                                    progressColor: Colors.green,
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Card(
+                          child: Row(
+                            children: [
+                              Image.asset('assets/patrol/zetta.gif'),
+                              Column(
+                                children: [
+                                  Text(
+                                    userPerson!.progress[2].badgeName,
+                                    style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(userPerson!.progress[2].dateCompletion),
+                                  LinearPercentIndicator(
+                                    width: screenWidth / 3,
+                                    lineHeight: 14.0,
+                                    animation: true,
+                                    animationDuration: 2000,
+                                    percent: 0.5,
+                                    barRadius: const Radius.circular(20),
+                                    backgroundColor: Colors.grey,
+                                    progressColor: Colors.green,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                    options: CarouselOptions(
+                      height: 200.0,
+                      aspectRatio: 4 / 3,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 3),
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
                     ),
-                );
-    
-    
+                  ),
+                ],
+              ),
+            ),
+    );
   }
 }
