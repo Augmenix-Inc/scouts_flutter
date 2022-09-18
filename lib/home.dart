@@ -325,29 +325,107 @@ class _HomeState extends State<Home> {
                 CarouselSlider(
                   items: [
                     Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/patrol/zetta.gif'),
-                          fit: BoxFit.cover,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: const LinearGradient(
+                          colors: [Colors.purple, Colors.blue],
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                        ),
+                      ),
+                      child: Card(
+                        child: Row(
+                          children: [
+                            const SizedBox(width: 10),
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Image.asset(
+                                  'assets/patrol/zetta.gif'), // TODO: Replace with actual image
+                            ),
+                            const SizedBox(width: 20),
+                            Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                Text(userPerson!.progress[0].badgeName),
+                                const SizedBox(height: 20),
+                                Text(userPerson!.progress[0].dateCompletion),
+                                const SizedBox(height: 20),
+                              ],
+                            ),
+                            const SizedBox(width: 10),
+                          ],
                         ),
                       ),
                     ),
                     Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/patrol/zetta.gif'),
-                          fit: BoxFit.cover,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: const LinearGradient(
+                          colors: [Colors.purple, Colors.blue],
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                        ),
+                      ),
+                      child: Card(
+                        child: Row(
+                          children: [
+                            const SizedBox(width: 10),
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Image.asset(
+                                  'assets/patrol/zetta.gif'), // TODO: Replace with actual image
+                            ),
+                            const SizedBox(width: 20),
+                            Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                Text(userPerson!.progress[1].badgeName),
+                                const SizedBox(height: 20),
+                                Text(userPerson!.progress[1].dateCompletion),
+                                const SizedBox(height: 20),
+                              ],
+                            ),
+                            const SizedBox(width: 10),
+                          ],
                         ),
                       ),
                     ),
                     Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/patrol/zetta.gif'),
-                          fit: BoxFit.cover,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: const LinearGradient(
+                          colors: [Colors.purple, Colors.blue],
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
                         ),
                       ),
-                    ),
+                      child: Card(
+                        child: Row(
+                          children: [
+                            const SizedBox(width: 10),
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Image.asset(
+                                  'assets/patrol/zetta.gif'), // TODO: Replace with actual image
+                            ),
+                            const SizedBox(width: 20),
+                            Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                Text(userPerson!.progress[2].badgeName),
+                                const SizedBox(height: 20),
+                                Text(userPerson!.progress[2].dateCompletion),
+                                const SizedBox(height: 20),
+                              ],
+                            ),
+                            const SizedBox(width: 10),
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                   options: CarouselOptions(
                     height: screenHeight / 2,

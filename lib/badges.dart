@@ -15,8 +15,15 @@ class Badges extends StatefulWidget {
 
 class _BadgesState extends State<Badges> {
   var tabid = 2;
+
+  bool isDesktop(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 1300;
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.width;
+    
     final theme = Theme.of(context);
     final signInBtnColorScheme = ColorScheme.fromSeed(
         seedColor: const Color.fromARGB(255, 226, 209, 15),

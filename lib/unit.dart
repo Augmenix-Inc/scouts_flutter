@@ -14,140 +14,155 @@ class Unit extends StatefulWidget {
 
 class _UnitState extends State<Unit> {
   var tabid = 1;
+
+  bool isDesktop(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 1300;
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.width;
+
     final theme = Theme.of(context);
     final signInBtnColorScheme = ColorScheme.fromSeed(
         seedColor: const Color.fromARGB(255, 226, 209, 15),
         brightness: theme.brightness);
     return Scaffold(
-      body: Column(children: [
-        // Menu Bar -> Shift to a widgets so that it can be reused
-        Container(
-          color: Theme.of(context).colorScheme.primaryContainer,
-          height: 50,
-          padding: const EdgeInsets.only(left: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/logo.jpg',
-                fit: BoxFit.cover,
-                height: 40,
-              ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {
-                  tabid == 0
-                      ? null
-                      : Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Home()),
-                        );
-                },
-                child: Text(
-                  "HOME",
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  tabid == 1
-                      ? null
-                      : Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Unit()),
-                        );
-                },
-                child: Text(
-                  "UNIT",
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  tabid == 2
-                      ? null
-                      : Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Badges()),
-                        );
-                },
-                child: Text(
-                  "BADGES",
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  tabid == 3
-                      ? null
-                      : Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Journey()),
-                        );
-                },
-                child: Text(
-                  "JOURNEY",
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () async {
-                  await googleSignIn.signOut();
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Login(),
+        body: isDesktop(context)
+            ? Column(children: [
+                // Menu Bar -> Shift to a widgets so that it can be reused
+                Container(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  height: 50,
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/logo.jpg',
+                        fit: BoxFit.cover,
+                        height: 40,
                       ),
-                      (route) => false);
-                },
-                style: ButtonStyle(
-                  elevation: MaterialStateProperty.all(0),
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.transparent),
-                  overlayColor: MaterialStateProperty.resolveWith((states) {
-                    if (states.contains(MaterialState.hovered)) {
-                      return signInBtnColorScheme.primaryContainer
-                          .withOpacity(0.08);
-                    } else if (states.contains(MaterialState.focused) ||
-                        states.contains(MaterialState.pressed)) {
-                      return signInBtnColorScheme.primaryContainer
-                          .withOpacity(0.12);
-                    }
-                    return Colors.transparent;
-                  }),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(
-                          color: signInBtnColorScheme.primary, width: 2),
-                    ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {
+                          tabid == 0
+                              ? null
+                              : Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Home()),
+                                );
+                        },
+                        child: Text(
+                          "HOME",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          tabid == 1
+                              ? null
+                              : Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Unit()),
+                                );
+                        },
+                        child: Text(
+                          "UNIT",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          tabid == 2
+                              ? null
+                              : Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Badges()),
+                                );
+                        },
+                        child: Text(
+                          "BADGES",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          tabid == 3
+                              ? null
+                              : Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Journey()),
+                                );
+                        },
+                        child: Text(
+                          "JOURNEY",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () async {
+                          await googleSignIn.signOut();
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Login(),
+                              ),
+                              (route) => false);
+                        },
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          overlayColor:
+                              MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.hovered)) {
+                              return signInBtnColorScheme.primaryContainer
+                                  .withOpacity(0.08);
+                            } else if (states.contains(MaterialState.focused) ||
+                                states.contains(MaterialState.pressed)) {
+                              return signInBtnColorScheme.primaryContainer
+                                  .withOpacity(0.12);
+                            }
+                            return Colors.transparent;
+                          }),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: BorderSide(
+                                  color: signInBtnColorScheme.primary,
+                                  width: 2),
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          "SIGN OUT",
+                          style: TextStyle(
+                            color: signInBtnColorScheme.primary,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                child: Text(
-                  "SIGN OUT",
-                  style: TextStyle(
-                    color: signInBtnColorScheme.primary,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        // Menu Bar Ends Here
-      ]),
-    );
+                // Menu Bar Ends Here
+              ])
+            : Column(
+                children: [Text("Mobile View")],
+              ));
   }
 }
